@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AjaxController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    <button id="ajax-button">Send AJAX request</button>
+    <div id="ajax-response"></div>
+
+    <script>
+    // Handle click event on the AJAX button
+    document.getElementById('ajax-button').addEventListener('click', function() {
+        // Send AJAX request to the URL defined in the route
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/ajax/handle-request');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Display response message in the AJAX response div
+                document.getElementById('ajax-response').innerHTML = xhr.responseText;
+            } else {
+                // Display error message if there's an error
+                document.getElementById('ajax-response').innerHTML = 'An error occurred';
+            }
+        };
+        xhr.send();
+    });
+    </script>
+
+</div>
+{% endblock %}
